@@ -40,6 +40,7 @@
         </div>
     </div>
     <div class="audio-containers">
+    <input id="volume" class="slider" type="range" min="1" max="1000" value="1000" onchange="musicVolume()" disabled>
     <button id="mute" class="mutebutton" onclick="muteButton()">
     <button id="mute2" class="wavebutton" onclick="muteWave()">
     </div>
@@ -52,7 +53,10 @@
     var removeAudio = new Audio('remove.wav');
     var backgroundAudio = new Audio('Fantasmas.mp3')
 
-    
+function musicVolume(){
+    var volumenumber = document.getElementById("volume").value
+    backgroundAudio.volume = volumenumber / 1000
+}
 
 function newToken() {
     document.getElementById("tokenZone").innerHTML += '<div id="mainKoda" class="tokenSelection">'
@@ -70,11 +74,15 @@ function newToken() {
 function muteWave() {
     if (waveMuted === false) {
     backgroundAudio.pause()
+    document.getElementById("volume").style.opacity = 0.4
+    document.getElementById("volume").disabled = true;
     document.getElementById("mute2").style.backgroundColor = "red";
     document.getElementById("mute2").style.borderColor = "red";
     waveMuted = true;
     } else {
     backgroundAudio.play()
+    document.getElementById("volume").style.opacity = 1
+    document.getElementById("volume").disabled = false;
     document.getElementById("mute2").style.backgroundColor = "green";
     document.getElementById("mute2").style.borderColor = "green";
     waveMuted = false;
