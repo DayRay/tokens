@@ -3,14 +3,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="teste.css">
-    <title>Teste</title>
+    <link rel="icon" href="imagens/TokenDoFeiticeiro.png">
+    <title>Contagem de Tokens</title>
 </head>
 <body>
     <div>
         <div class="tokenSelection">
             <h3>Tokens Koda</h3>
             <div id="koda" class="image-container">
-                <img src="imagens/TokenDoEngenhoso.png" alt="token" style="opacity: 0;">
             </div>
             <div class="button-container">
             <button type="button" onclick="AddNewLayer('koda')">+</button>
@@ -21,7 +21,6 @@
         <div class="tokenSelection">
             <h3>Tokens Ifera</h3>
             <div id="ifera" class="image-container">
-                <img src="imagens/TokenDoEngenhoso.png" alt="token" style="opacity: 0;">
             </div>
             <div class="button-container">
             <button type="button" onclick="AddNewLayer('ifera')">+</button>
@@ -32,7 +31,6 @@
         <div class="tokenSelection">
             <h3>Tokens Henri</h3>
             <div id="henri" class="image-container">
-                <img src="imagens/TokenDoEngenhoso.png" alt="token" style="opacity: 0;">
             </div>
             <div class="button-container">
             <button type="button" onclick="AddNewLayer('henri')">+</button>
@@ -43,54 +41,73 @@
     </div>
 </body>
 <script>
-    function AddNewLayer(containerId){
-        var container = document.getElementById(containerId);
-        var containernName = container.id
-        
-        if (containernName === 'koda' && container.children.length <= 9) {
-            if (document.getElementById("ammKoda").innerHTML === "0/10") {
-                container.removeChild(container.lastElementChild);
-            }
-        container.innerHTML += '<img src="imagens/TokenDoEngenhoso.png" alt="token">';
-        document.getElementById("ammKoda").innerHTML = container.children.length + "/10"
-        console.log(container.id)
-        } else if (containernName === 'ifera' && container.children.length <= 9) {
-            if (document.getElementById("ammIfera").innerHTML === "0/10") {
-                container.removeChild(container.lastElementChild);
-            }
-        container.innerHTML += '<img src="imagens/TokenDoAltruismo.png" alt="token">';
-        document.getElementById("ammIfera").innerHTML = container.children.length + "/10"
-        console.log(containernName)
-        console.log(container.id)
-        } else if (containernName === 'henri' && container.children.length <= 9) {
-            if (document.getElementById("ammHenri").innerHTML === "0/10") {
-                container.removeChild(container.lastElementChild);
-            }
-        container.innerHTML += '<img src="imagens/TokenDoGuerreiro.png" alt="token">';
-        document.getElementById("ammHenri").innerHTML = container.children.length + "/10"
-        console.log(containernName)
-        console.log(container.id)
-        } else {
-        }  
-    }
-    function RemoveNewLayer(containerID){
-        const container = document.getElementById(containerID);
-        var containernName = container.id
-        if (container.children.length > 0) {
-            container.removeChild(container.lastElementChild);
-        } else {
-        }
-        if (containernName === 'koda' && container.children.length <= 9) {
-        document.getElementById("ammKoda").innerHTML = container.children.length + "/10"
-        } else if (containernName === 'ifera' && container.children.length <= 9) {
-        document.getElementById("ammIfera").innerHTML = container.children.length + "/10"
-        } else if (containernName === 'henri' && container.children.length <= 9) {
-        document.getElementById("ammHenri").innerHTML = container.children.length + "/10"
-        } else {
-        }
-        if  (container.children.length === 0) {
-            container.innerHTML += '<img src="imagens/TokenDoEngenhoso.png" alt="token" style="opacity: 0;">'
+function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = `${name}=${value}; ${expires}; path=/`;
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (const cookie of cookies) {
+        const [key, value] = cookie.split('=');
+        if (key === name) {
+            return value;
         }
     }
+    return null;
+}
+
+function loadTokens(containerId, counterId, tokenImage) {
+    const savedTokens = getCookie(containerId);
+    const container = document.getElementById(containerId);
+    const counter = document.getElementById(counterId);
+    if (savedTokens) {
+        const tokenCount = parseInt(savedTokens, 10);
+        for (let i = 0; i < tokenCount; i++) {
+            container.innerHTML += `<img src="${tokenImage}" alt="token">`;
+        }
+        counter.innerHTML = `${tokenCount}/10`;
+    }
+}
+
+function AddNewLayer(containerId) {
+    const container = document.getElementById(containerId);
+    const counterId = `amm${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
+    const counter = document.getElementById(counterId);
+    let tokenImage;
+
+    if (containerId === 'koda') tokenImage = 'imagens/TokenDoEngenhoso.png';
+    else if (containerId === 'ifera') tokenImage = 'imagens/TokenDoAltruismo.png';
+    else if (containerId === 'henri') tokenImage = 'imagens/TokenDoGuerreiro.png';
+
+    if (container.children.length <= 9) {
+        container.innerHTML += `<img src="${tokenImage}" alt="token">`;
+        const tokenCount = container.children.length;
+        counter.innerHTML = `${tokenCount}/10`;
+        setCookie(containerId, tokenCount, 7); // Save token count to cookie
+    }
+}
+
+function RemoveNewLayer(containerId) {
+    const container = document.getElementById(containerId);
+    const counterId = `amm${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
+    const counter = document.getElementById(counterId);
+
+    if (container.children.length > 0) {
+        container.removeChild(container.lastElementChild);
+        const tokenCount = container.children.length;
+        counter.innerHTML = `${tokenCount}/10`;
+        setCookie(containerId, tokenCount, 7); // Update token count in cookie
+    }
+}
+
+// Load tokens on page load
+window.onload = function () {
+    loadTokens('koda', 'ammKoda', 'imagens/TokenDoEngenhoso.png');
+    loadTokens('ifera', 'ammIfera', 'imagens/TokenDoAltruismo.png');
+    loadTokens('henri', 'ammHenri', 'imagens/TokenDoGuerreiro.png');
+};
 </script>
 </html>
