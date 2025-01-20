@@ -55,7 +55,7 @@ function muteButton() {
     document.getElementById("mute").style.borderColor = "red";
     muted = true;
     } else {
-    deMuted.play()
+    deMuted.cloneNode().play()
     document.getElementById("mute").style.backgroundColor = "green";
     document.getElementById("mute").style.borderColor = "green";
     muted = false;
@@ -109,7 +109,7 @@ function AddNewLayer(containerId) {
 
     if (container.children.length <= 8) {
         if (muted === false) {
-            addAudio.play()
+            addAudio.cloneNode().play()
         }
         container.innerHTML += `<img src="${tokenImage}" alt="token">`;
         const tokenCount = container.children.length;
@@ -117,7 +117,7 @@ function AddNewLayer(containerId) {
         setCookie(containerId, tokenCount, 7); // Save token count to cookie
     } else if (container.children.length === 9){
         if (muted === false) {
-            addAudio.play()
+            addAudio.cloneNode().play()
         }
         container.innerHTML += `<img src="${tokenImage}" alt="token">`;
         const tokenCount = container.children.length;
@@ -134,7 +134,7 @@ function RemoveNewLayer(containerId) {
 
     if (container.children.length > 0 && container.children.length < 10) {
         if (muted === false) {
-            removeAudio.play()
+            removeAudio.cloneNode().play()
         }
         container.removeChild(container.lastElementChild);
         const tokenCount = container.children.length;
@@ -142,7 +142,7 @@ function RemoveNewLayer(containerId) {
         setCookie(containerId, tokenCount, 7); // Update token count in cookie
     } else if (container.children.length === 10) {
         if (muted === false) {
-            removeAudio.play()
+            removeAudio.cloneNode().play()
         }
         container.removeChild(container.lastElementChild);
         const tokenCount = container.children.length;
