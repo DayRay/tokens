@@ -7,7 +7,7 @@
     <title>Contagem de Tokens</title>
 </head>
 <body>
-    <div>
+    <div id="tokenZone">
         <div id="mainKoda" class="tokenSelection">
             <h3>Tokens Marcelo</h3>
             <div id="koda" class="image-container">
@@ -39,15 +39,46 @@
             </div>
         </div>
     </div>
-    <div id="mute" class="mutebutton" onclick="muteButton()">
-
+    <div class="audio-containers">
+    <button id="mute" class="mutebutton" onclick="muteButton()">
+    <button id="mute2" class="wavebutton" onclick="muteWave()">
     </div>
 </body>
 <script>
     var muted = false;
-    var deMuted = new Audio('backSound.wav');
+    var waveMuted = false;
+    var deMuted = new Audio('backSound.wav');   
     var addAudio = new Audio('add.mp3');
     var removeAudio = new Audio('remove.wav');
+    var backgroundAudio = new Audio('Fantasmas.mp3')
+    backgroundAudio.play()
+function newToken() {
+    document.getElementById("tokenZone").innerHTML += '<div id="mainKoda" class="tokenSelection">'
+    document.getElementById("tokenZone").innerHTML += '<h3>Tokens Marcelo</h3>'
+    document.getElementById("tokenZone").innerHTML += '<div id="koda" class="image-container">'
+    document.getElementById("tokenZone").innerHTML += '</div>'
+    document.getElementById("tokenZone").innerHTML += '<div class="button-container">'
+    document.getElementById("tokenZone").innerHTML += '<button type="button" style="background-color: rgb(1, 87, 1); border-color:rgb(1, 87, 1);" onclick="AddNewLayer(\'koda\')"></button>'
+    document.getElementById("tokenZone").innerHTML += '<h3 id="ammKoda">0/10</h3>'
+    document.getElementById("tokenZone").innerHTML += '<button type="button" style="background-color: rgb(117, 0, 0); border-color:rgb(117, 0, 0);" onclick="RemoveNewLayer(\'koda\')"></button>'
+    document.getElementById("tokenZone").innerHTML += '</div>'
+    document.getElementById("tokenZone").innerHTML += '</div>'
+}
+
+function muteWave() {
+    if (waveMuted === false) {
+    backgroundAudio.pause()
+    document.getElementById("mute2").style.backgroundColor = "red";
+    document.getElementById("mute2").style.borderColor = "red";
+    waveMuted = true;
+    } else {
+    backgroundAudio.play()
+    document.getElementById("mute2").style.backgroundColor = "green";
+    document.getElementById("mute2").style.borderColor = "green";
+    waveMuted = false;
+    }
+
+}
 
 function muteButton() {
     if (muted === false) {
@@ -55,7 +86,7 @@ function muteButton() {
     document.getElementById("mute").style.borderColor = "red";
     muted = true;
     } else {
-    deMuted.play()
+    deMuted.cloneNode().play()
     document.getElementById("mute").style.backgroundColor = "green";
     document.getElementById("mute").style.borderColor = "green";
     muted = false;
@@ -109,7 +140,7 @@ function AddNewLayer(containerId) {
 
     if (container.children.length <= 8) {
         if (muted === false) {
-            addAudio.play()
+            addAudio.cloneNode().play()
         }
         container.innerHTML += `<img src="${tokenImage}" alt="token">`;
         const tokenCount = container.children.length;
@@ -117,7 +148,7 @@ function AddNewLayer(containerId) {
         setCookie(containerId, tokenCount, 7); // Save token count to cookie
     } else if (container.children.length === 9){
         if (muted === false) {
-            addAudio.play()
+            addAudio.cloneNode().play()
         }
         container.innerHTML += `<img src="${tokenImage}" alt="token">`;
         const tokenCount = container.children.length;
@@ -134,7 +165,7 @@ function RemoveNewLayer(containerId) {
 
     if (container.children.length > 0 && container.children.length < 10) {
         if (muted === false) {
-            removeAudio.play()
+            removeAudio.cloneNode().play()
         }
         container.removeChild(container.lastElementChild);
         const tokenCount = container.children.length;
@@ -142,7 +173,7 @@ function RemoveNewLayer(containerId) {
         setCookie(containerId, tokenCount, 7); // Update token count in cookie
     } else if (container.children.length === 10) {
         if (muted === false) {
-            removeAudio.play()
+            removeAudio.cloneNode().play()
         }
         container.removeChild(container.lastElementChild);
         const tokenCount = container.children.length;

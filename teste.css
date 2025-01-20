@@ -20,6 +20,23 @@
     max-width: 100%;
     height: auto;
 }
+.audio-containers {
+    background-repeat: no-repeat;
+    display: inline-block;
+    padding: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    color: green;
+    position: fixed;
+    bottom: 3%;
+    right: 2%;
+    z-index:2;
+}
+.audio-containers button {
+    margin: 3px;
+    padding: 30px;
+    background-color: green;
+}
 img{
     width: 70px;
     border:solid;
@@ -54,19 +71,14 @@ button {
     margin-bottom: 5px;
 }
 .mutebutton {
-    background-color: green;
     background-image: url(imagens/mute.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+
+  }
+.wavebutton {
+    background-image: url(imagens/wave.png);
+    background-position: center;
     background-size: cover;
-    display: inline-block;
-    padding: 25px;
-    border: 2px solid green;
-    border-radius: 5px;
-    font-size: 18px;
-    text-decoration: none;
-    color: green;
-    position: fixed;
-    transition: transform 0.5s ease-in-out;
-    bottom: 5%;
-    right: 3%;
-    z-index:2;
   }
