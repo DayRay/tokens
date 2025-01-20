@@ -8,39 +8,60 @@
 </head>
 <body>
     <div>
-        <div class="tokenSelection">
+        <div id="mainKoda" class="tokenSelection">
             <h3>Tokens Koda</h3>
             <div id="koda" class="image-container">
             </div>
             <div class="button-container">
-            <button type="button" onclick="AddNewLayer('koda')">+</button>
+            <button type="button" style="background-color: rgb(1, 87, 1); border-color:rgb(1, 87, 1);" onclick="AddNewLayer('koda')"></button>
             <h3 id="ammKoda">0/10</h3>
-            <button type="button" onclick="RemoveNewLayer('koda')">-</button>
+            <button type="button" style="background-color: rgb(117, 0, 0); border-color:rgb(117, 0, 0);" onclick="RemoveNewLayer('koda')"></button>
             </div>
         </div>
-        <div class="tokenSelection">
+        <div id="mainIfera" class="tokenSelection">
             <h3>Tokens Ifera</h3>
             <div id="ifera" class="image-container">
             </div>
             <div class="button-container">
-            <button type="button" onclick="AddNewLayer('ifera')">+</button>
+            <button type="button" style="background-color: rgb(1, 87, 1); border-color:rgb(1, 87, 1);" onclick="AddNewLayer('ifera')"></button>
             <h3 id="ammIfera">0/10</h3>
-            <button type="button" onclick="RemoveNewLayer('ifera')">-</button>
+            <button type="button" style="background-color: rgb(117, 0, 0); border-color:rgb(117, 0, 0);" onclick="RemoveNewLayer('ifera')"></button>
             </div>
         </div>
-        <div class="tokenSelection">
+        <div id="mainHenri" class="tokenSelection">
             <h3>Tokens Henri</h3>
             <div id="henri" class="image-container">
             </div>
             <div class="button-container">
-            <button type="button" onclick="AddNewLayer('henri')">+</button>
+            <button type="button" style="background-color: rgb(1, 87, 1); border-color:rgb(1, 87, 1);" onclick="AddNewLayer('henri')"></button>
             <h3 id="ammHenri">0/10</h3>
-            <button type="button" onclick="RemoveNewLayer('henri')">-</button>
+            <button type="button" style="background-color: rgb(117, 0, 0); border-color:rgb(117, 0, 0);" onclick="RemoveNewLayer('henri')"></button>
             </div>
         </div>
     </div>
+    <div id="mute" class="mutebutton" onclick="muteButton()">
+
+    </div>
 </body>
 <script>
+    var muted = false;
+
+function muteButton() {
+    var deMuted = new Audio('backSound.wav')
+    if (muted === false) {
+    document.getElementById("mute").style.backgroundColor = "red";
+    document.getElementById("mute").style.borderColor = "red";
+    muted = true;
+    } else {
+    deMuted.play()
+    document.getElementById("mute").style.backgroundColor = "green";
+    document.getElementById("mute").style.borderColor = "green";
+    muted = false;
+    }
+
+}
+
+
 function setCookie(name, value, days) {
     const d = new Date();
     d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
@@ -75,14 +96,27 @@ function loadTokens(containerId, counterId, tokenImage) {
 function AddNewLayer(containerId) {
     const container = document.getElementById(containerId);
     const counterId = `amm${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
+    const mainId = `main${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
     const counter = document.getElementById(counterId);
+    var addAudio = new Audio('add.mp3')
     let tokenImage;
 
     if (containerId === 'koda') tokenImage = 'imagens/TokenDoEngenhoso.png';
     else if (containerId === 'ifera') tokenImage = 'imagens/TokenDoAltruismo.png';
     else if (containerId === 'henri') tokenImage = 'imagens/TokenDoGuerreiro.png';
 
-    if (container.children.length <= 9) {
+    if (container.children.length <= 8) {
+        if (muted === false) {
+            addAudio.play()
+        }
+        container.innerHTML += `<img src="${tokenImage}" alt="token">`;
+        const tokenCount = container.children.length;
+        counter.innerHTML = `${tokenCount}/10`;
+        setCookie(containerId, tokenCount, 7); // Save token count to cookie
+    } else if (container.children.length === 9){
+        if (muted === false) {
+            addAudio.play()
+        }
         container.innerHTML += `<img src="${tokenImage}" alt="token">`;
         const tokenCount = container.children.length;
         counter.innerHTML = `${tokenCount}/10`;
@@ -93,9 +127,22 @@ function AddNewLayer(containerId) {
 function RemoveNewLayer(containerId) {
     const container = document.getElementById(containerId);
     const counterId = `amm${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
+    const mainId = `main${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
     const counter = document.getElementById(counterId);
+    var removeAudio = new Audio('remove.wav')
 
-    if (container.children.length > 0) {
+    if (container.children.length > 0 && container.children.length < 10) {
+        if (muted === false) {
+            removeAudio.play()
+        }
+        container.removeChild(container.lastElementChild);
+        const tokenCount = container.children.length;
+        counter.innerHTML = `${tokenCount}/10`;
+        setCookie(containerId, tokenCount, 7); // Update token count in cookie
+    } else if (container.children.length === 10) {
+        if (muted === false) {
+            removeAudio.play()
+        }
         container.removeChild(container.lastElementChild);
         const tokenCount = container.children.length;
         counter.innerHTML = `${tokenCount}/10`;

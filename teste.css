@@ -52,5 +52,21 @@ button {
     width: 70px;
     height: 20px;
     margin-bottom: 5px;
-    
 }
+.mutebutton {
+    background-color: green;
+    background-image: url(imagens/mute.png);
+    background-size: cover;
+    display: inline-block;
+    padding: 25px;
+    border: 2px solid green;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    color: green;
+    position: fixed;
+    transition: transform 0.5s ease-in-out;
+    bottom: 5%;
+    right: 3%;
+    z-index:2;
+  }
