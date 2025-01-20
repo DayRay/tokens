@@ -35,7 +35,6 @@
 .audio-containers button {
     margin: 3px;
     padding: 30px;
-    background-color: green;
 }
 img{
     width: 70px;
@@ -75,10 +74,11 @@ button {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 60%;
-
+    background-color: green;
   }
 .wavebutton {
     background-image: url(imagens/wave.png);
     background-position: center;
     background-size: cover;
+    background-color: red;
   }

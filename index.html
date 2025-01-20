@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,7 +6,7 @@
     <link rel="icon" href="imagens/TokenDoFeiticeiro.png">
     <title>Contagem de Tokens</title>
 </head>
-<body>
+<body >
     <div id="tokenZone">
         <div id="mainKoda" class="tokenSelection">
             <h3>Tokens Marcelo</h3>
@@ -46,12 +46,14 @@
 </body>
 <script>
     var muted = false;
-    var waveMuted = false;
+    var waveMuted = true;
     var deMuted = new Audio('backSound.wav');   
     var addAudio = new Audio('add.mp3');
     var removeAudio = new Audio('remove.wav');
     var backgroundAudio = new Audio('Fantasmas.mp3')
-    backgroundAudio.play()
+
+    
+
 function newToken() {
     document.getElementById("tokenZone").innerHTML += '<div id="mainKoda" class="tokenSelection">'
     document.getElementById("tokenZone").innerHTML += '<h3>Tokens Marcelo</h3>'
