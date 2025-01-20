@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="teste.css">
+    <title>Teste</title>
+</head>
+<body>
+    <div>
+        <div class="tokenSelection">
+            <h3>Tokens Koda</h3>
+            <div id="koda" class="image-container">
+                <img src="imagens/TokenDoEngenhoso.png" alt="token" style="opacity: 0;">
+            </div>
+            <div class="button-container">
+            <button type="button" onclick="AddNewLayer('koda')">+</button>
+            <h3 id="ammKoda">0/10</h3>
+            <button type="button" onclick="RemoveNewLayer('koda')">-</button>
+            </div>
+        </div>
+        <div class="tokenSelection">
+            <h3>Tokens Ifera</h3>
+            <div id="ifera" class="image-container">
+                <img src="imagens/TokenDoEngenhoso.png" alt="token" style="opacity: 0;">
+            </div>
+            <div class="button-container">
+            <button type="button" onclick="AddNewLayer('ifera')">+</button>
+            <h3 id="ammIfera">0/10</h3>
+            <button type="button" onclick="RemoveNewLayer('ifera')">-</button>
+            </div>
+        </div>
+        <div class="tokenSelection">
+            <h3>Tokens Henri</h3>
+            <div id="henri" class="image-container">
+                <img src="imagens/TokenDoEngenhoso.png" alt="token" style="opacity: 0;">
+            </div>
+            <div class="button-container">
+            <button type="button" onclick="AddNewLayer('henri')">+</button>
+            <h3 id="ammHenri">0/10</h3>
+            <button type="button" onclick="RemoveNewLayer('henri')">-</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function AddNewLayer(containerId){
+        var container = document.getElementById(containerId);
+        var containernName = container.id
+        
+        if (containernName === 'koda' && container.children.length <= 9) {
+            if (document.getElementById("ammKoda").innerHTML === "0/10") {
+                container.removeChild(container.lastElementChild);
+            }
+        container.innerHTML += '<img src="imagens/TokenDoEngenhoso.png" alt="token">';
+        document.getElementById("ammKoda").innerHTML = container.children.length + "/10"
+        console.log(container.id)
+        } else if (containernName === 'ifera' && container.children.length <= 9) {
+            if (document.getElementById("ammIfera").innerHTML === "0/10") {
+                container.removeChild(container.lastElementChild);
+            }
+        container.innerHTML += '<img src="imagens/TokenDoAltruismo.png" alt="token">';
+        document.getElementById("ammIfera").innerHTML = container.children.length + "/10"
+        console.log(containernName)
+        console.log(container.id)
+        } else if (containernName === 'henri' && container.children.length <= 9) {
+            if (document.getElementById("ammHenri").innerHTML === "0/10") {
+                container.removeChild(container.lastElementChild);
+            }
+        container.innerHTML += '<img src="imagens/TokenDoGuerreiro.png" alt="token">';
+        document.getElementById("ammHenri").innerHTML = container.children.length + "/10"
+        console.log(containernName)
+        console.log(container.id)
+        } else {
+        }  
+    }
+    function RemoveNewLayer(containerID){
+        const container = document.getElementById(containerID);
+        var containernName = container.id
+        if (container.children.length > 0) {
+            container.removeChild(container.lastElementChild);
+        } else {
+        }
+        if (containernName === 'koda' && container.children.length <= 9) {
+        document.getElementById("ammKoda").innerHTML = container.children.length + "/10"
+        } else if (containernName === 'ifera' && container.children.length <= 9) {
+        document.getElementById("ammIfera").innerHTML = container.children.length + "/10"
+        } else if (containernName === 'henri' && container.children.length <= 9) {
+        document.getElementById("ammHenri").innerHTML = container.children.length + "/10"
+        } else {
+        }
+        if  (container.children.length === 0) {
+            container.innerHTML += '<img src="imagens/TokenDoEngenhoso.png" alt="token" style="opacity: 0;">'
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,56 @@
+.titulo{
+    justify-content: space-around;
+    display: flex;
+    height: auto;
+    margin-bottom: 10px;
+    padding-top: 30px;
+}
+.button-container{
+    justify-content: space-around;
+    display: flex;
+    height: auto;
+}
+.image-container {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding: 5px;
+    max-width: 100%;
+    height: auto;
+}
+img{
+    width: 70px;
+    border:solid;
+    border:1px;
+}
+.tokenSelection {
+    margin: 5px;
+    padding-left: 5px;
+    border-color: black;
+    border: solid;
+    background-image: url(imagens/63511.jpg);
+    background-size: cover;
+}
+body{
+    background-image: url(imagens/bg.jpg);
+    background-size: cover;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.tokenSelection h3 {
+    justify-content: space-around;
+    height: auto;
+    display: flex;
+}
+button {
+    width: 70px;
+    height: 20px;
+    margin-bottom: 5px;
+    
+}
