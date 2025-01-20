@@ -45,9 +45,11 @@
 </body>
 <script>
     var muted = false;
+    var deMuted = new Audio('backSound.wav');
+    var addAudio = new Audio('add.mp3');
+    var removeAudio = new Audio('remove.wav');
 
 function muteButton() {
-    var deMuted = new Audio('backSound.wav')
     if (muted === false) {
     document.getElementById("mute").style.backgroundColor = "red";
     document.getElementById("mute").style.borderColor = "red";
@@ -98,7 +100,7 @@ function AddNewLayer(containerId) {
     const counterId = `amm${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
     const mainId = `main${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
     const counter = document.getElementById(counterId);
-    var addAudio = new Audio('add.mp3')
+    
     let tokenImage;
 
     if (containerId === 'koda') tokenImage = 'imagens/TokenDoEngenhoso.png';
@@ -129,7 +131,6 @@ function RemoveNewLayer(containerId) {
     const counterId = `amm${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
     const mainId = `main${containerId.charAt(0).toUpperCase()}${containerId.slice(1)}`;
     const counter = document.getElementById(counterId);
-    var removeAudio = new Audio('remove.wav')
 
     if (container.children.length > 0 && container.children.length < 10) {
         if (muted === false) {
